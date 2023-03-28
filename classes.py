@@ -91,7 +91,7 @@ class BaseCharacter:
 
 # 캐릭터 클래스
 class Character(BaseCharacter):
-    def __init__(self, name, hp=800, power=10, mana=1):
+    def __init__(self, name, hp=100, power=10, mana=1):
         super().__init__(name, hp, power, mana)
 
         print(f'캐릭터의 이름은 {name}입니다.')
@@ -142,7 +142,7 @@ class Spike_Slime(Monster):
 
     def attack(self, other):
         atktype = random.randint(1, 4)
-        if atktype > 1:
+        if atktype <= 2:
             if self.weak_debuff >= 1 and other.vulunable_debuff == 0:
                 damage = random.randint(self.power - 4, self.power + 4)//2
             elif self.weak_debuff == 0 and other.vulunable_debuff >= 1:
@@ -194,16 +194,16 @@ class Gremlin_Nob(Monster):
         super().__init__(name, hp, power)
 
     def attack(self, other):
-        atktype = random.randint(1, 4)
-        if atktype > 1:
-            damage = random.randint(self.power - 4, self.power + 4)
+        atktype = random.randint(1, 3)
+        if atktype <= 1:
+            damage = random.randint(self.power - 5, self.power + 5)
             other.hp = max(other.hp - damage, 0)
             print(f"{self.name}의 공격! {other.name}에게 {damage}의 데미지를 입혔습니다.")
             if other.hp == 0:
                 print("GAME OVER")
         else:
             self.power += 3
-            damage = random.randint(self.power, self.power + 5)
+            damage = random.randint(self.power, self.power + 7)
             other.hp = max(other.hp - damage, 0)
             print(
                 f"{self.name}이 격노합니다! {other.name}에게 {damage}의 데미지를 입혔습니다.\n{self.name}의 힘이 3 증가했습니다.")
@@ -219,8 +219,8 @@ class Lagavulin(Monster):
 
     def attack(self, other):
         atktype = random.randint(1, 3)
-        if atktype > 1:
-            damage = random.randint(self.power - 5, self.power + 4)
+        if atktype <= 1:
+            damage = random.randint(self.power - 5, self.power + 3)
             other.hp = max(other.hp - damage, 0)
             print(f"{self.name}의 공격! {other.name}에게 {damage}의 데미지를 입혔습니다.")
             if other.hp == 0:
@@ -238,8 +238,6 @@ class Lagavulin(Monster):
                     print("GAME OVER")
 
 # boss/육각령
-
-
-class Hexaghost(Monster):
-    def __init__(self, name, hp, power):
-        super().__init__(name, hp, power)
+# class Hexaghost(Monster):
+#     def __init__(self, name, hp, power):
+#         super().__init__(name, hp, power)
